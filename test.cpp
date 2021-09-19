@@ -227,6 +227,10 @@ int main() {
  //
  // Test the string_view interface (which required C++17)
  //
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdangling-gsl"
+#endif
     std::string_view sv_orig    = "foobarbaz";
     std::string_view sv_encoded = base64_encode(sv_orig); ///TODO test.cpp:231:35: warning: object backing the pointer will be destroyed at the end of the full-expression [-Wdangling-gsl]
 
@@ -237,6 +241,9 @@ int main() {
 
     std::string_view sv_decoded = base64_decode(sv_encoded);///TODO test.cpp:231:35: warning: object backing the pointer will be destroyed at the end of the full-expression [-Wdangling-gsl]
 
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
     if (sv_decoded != sv_orig) {
        std::cout << "Failed to decode with string_view" << std::endl;
        all_tests_passed = false;

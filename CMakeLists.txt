@@ -9,7 +9,7 @@ project(base64
 set(CMAKE_CXX_COMPILER clang++)
 
 add_compile_options(
-#    -Werror                 
+   -Werror                 
    -Wall                   
    -Wextra                 
    -pedantic               
@@ -49,6 +49,12 @@ add_executable(
     test.cpp
     base64.cpp
     )
+
+add_executable(
+    measure-time 
+    measure-time.cpp
+    base64.cpp
+)
    
 if( GTest_FOUND)
     
@@ -78,4 +84,9 @@ endif()
 add_test(
     NAME ${S_TEST}
     COMMAND ${S_TEST}
+)
+
+add_test(
+    NAME measure-time
+    COMMAND measure-time
 )
