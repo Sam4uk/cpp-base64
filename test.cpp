@@ -228,14 +228,14 @@ int main() {
  // Test the string_view interface (which required C++17)
  //
     std::string_view sv_orig    = "foobarbaz";
-    std::string_view sv_encoded = base64_encode(sv_orig);
+    std::string_view sv_encoded = base64_encode(sv_orig); ///TODO test.cpp:231:35: warning: object backing the pointer will be destroyed at the end of the full-expression [-Wdangling-gsl]
 
     if (sv_encoded != "Zm9vYmFyYmF6") {
        std::cout << "Failed to encode with string_view" << std::endl;
        all_tests_passed = false;
     }
 
-    std::string_view sv_decoded = base64_decode(sv_encoded);
+    std::string_view sv_decoded = base64_decode(sv_encoded);///TODO test.cpp:231:35: warning: object backing the pointer will be destroyed at the end of the full-expression [-Wdangling-gsl]
 
     if (sv_decoded != sv_orig) {
        std::cout << "Failed to decode with string_view" << std::endl;
